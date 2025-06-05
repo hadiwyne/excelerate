@@ -1,0 +1,355 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.background-wave {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -1;
+}
+
+.wave {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #4973ff;
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+  transition: 0.5s;
+}
+
+.wave span {
+  content: "";
+  position: absolute;
+  width: 325vh;
+  height: 325vh;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -75%);
+  background: #000;
+}
+
+.wave span:nth-child(1) {
+  border-radius: 45%;
+  background: rgba(20, 20, 20, 1);
+  animation: animate 5s linear infinite;
+}
+
+.wave span:nth-child(2) {
+  border-radius: 40%;
+  background: rgba(20, 20, 20, 0.5);
+  animation: animate 10s linear infinite;
+}
+
+.wave span:nth-child(3) {
+  border-radius: 42.5%;
+  background: rgba(20, 20, 20, 0.5);
+  animation: animate 15s linear infinite;
+}
+
+@keyframes animate {
+  0% {
+    transform: translate(-50%, -75%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -75%) rotate(360deg);
+  }
+}
+
+.page-content {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  padding: 20px;
+}
+
+.title-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 2;
+  width: 80%;
+  max-width: 1000px;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.title-container.hide {
+  opacity: 0;
+  transform: translate(-50%, -60%);
+}
+
+.main-title {
+  font-size: 3em;
+  margin-bottom: 0.5em;
+  color: #fff;
+}
+
+.sub-title {
+  font-size: 1.2em;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
+  display: block;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h2 {
+  margin: 1.5em 0 0.5em;
+}
+
+p {
+  margin-bottom: 1em;
+  line-height: 1.6;
+}
+
+a {
+  color: #4ea1f7;
+  text-decoration: underline;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+header {
+  margin-bottom: 2em;
+}
+
+aside {
+  margin-bottom: 2em;
+}
+
+aside a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  margin: 0.5em 0;
+}
+
+aside a:hover {
+  text-decoration: underline;
+}
+
+.side-nav {
+  position: fixed;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+  opacity: 1;
+}
+
+.side-nav.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-50%) translateX(-100px);
+}
+
+.side-nav:hover {
+  transform: translateY(-50%) scale(1.02);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.side-nav a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.side-nav a:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(5px);
+}
+
+.nav-dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  left: 0;
+  background: rgba(30,30,30,0.95);
+  border-radius: 8px;
+  min-width: 220px;
+  z-index: 10;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  padding: 8px 0;
+}
+
+.nav-dropdown:hover .dropdown-content,
+.nav-dropdown:focus-within .dropdown-content {
+  display: flex;
+}
+
+.dropdown-content a {
+  color: #fff;
+  padding: 10px 24px;
+  text-decoration: none;
+  display: block;
+  transition: background 0.2s;
+}
+
+.dropdown-content a:hover {
+  background: rgba(73, 115, 255, 0.15);
+}
+
+.dropdown-toggle {
+  position: relative;
+  padding-right: 28px;
+}
+
+.dropdown-toggle::after {
+  content: '';
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  border: solid #fff;
+  border-width: 0 2.5px 2.5px 0;
+  display: inline-block;
+  padding: 5px;
+  pointer-events: none;
+  transition: transform 0.2s;
+}
+
+.nav-dropdown:hover .dropdown-toggle::after,
+.nav-dropdown:focus-within .dropdown-toggle::after {
+  transform: translateY(-50%) rotate(225deg);
+}
+
+
+main {
+  display: flex;
+  flex-direction: column; 
+  justify-content: space-evenly; 
+  text-align: justify; 
+  width: 100%;
+  min-height: 100vh; 
+  margin: 0; 
+  margin-left: 300px; 
+  max-width: 1000px;
+  padding: 50px;
+  margin-top: 100vh;
+}
+
+h1, h2 {
+  margin-bottom: 0.5em;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px); 
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+th {
+  background: rgba(255, 255, 255, 0.2); /* Slightly darker header */
+  font-weight: 600;
+}
+
+tr:hover {
+  background: rgba(255, 255, 255, 0.15); /* Hover effect */
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+  background: transparent;
+}
+th {
+  background-color: none;
+}
+tr:first-child th:first-child {
+  border-top-left-radius: 10px;
+}
+tr:first-child th:last-child {
+  border-top-right-radius: 10px;
+}
+tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+.dataset-overview-par-2{
+  margin-top: 12px;
+}
+
+#introduction-para,
+#dataset-overview-para,
+#dataset-overview-para-2,
+#bar-chart-analysis-para,
+#ctr-by-age-para,
+#age-grp-reach-para,
+#amt-per-campaign-para,
+#reach-campaigns-para,
+#cpc-by-country-para,
+#uctr-by-country-para,
+#scatter-bubble-analysis-para,
+#interpreting-plt,
+#heatmap-analysis-para {
+  background: rgba(30, 30, 30, 0.7);
+  border-radius: 12px;
+  padding: 18px 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+
+.bar-chart,
+.scatter-plot,
+.heatmap,
+.pie-chart,
+.stacked-bar-chart {
+  display: block;
+  margin: 24px auto;
+  max-width: 100%;
+  border-radius: 18px;
+  transition: box-shadow 0.3s, border 0.3s;
+  border: 2px solid transparent;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Data Visualization Project</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <section class="background-wave">
+    <div class="wave">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </section>
+
+  <div class="page-content">
+    <div class="title-container">
+      <h1 class="main-title">Data Visualization Project for Excelerate</h1>
+      <p class="sub-title">Data-Driven Insights into Ad Campaign Performance: A Collaborative Internship Project Analzying Engagement, Reach, and Cost-Efficiency to Optimize GlobalShala's Marketing Strategy.<br>Arranged by <a href="https://www.linkedin.com/in/khabdulhadis/">Abdul Hadi</a></p>
+    </div>
+
+    <nav class="side-nav hidden">
+  <a href="#introduction">Introduction</a>
+  <a href="#dataset-overview">Dataset Overview</a>
+  <div class="nav-dropdown">
+    <a href="#bar-chart-analysis" class="dropdown-toggle">Bar Chart Analysis</a>
+    <div class="dropdown-content">
+      <a href="#ctr-by-age">CTR by Age Group</a>
+      <a href="#age-grp-reach">Age Group vs. Reach</a>
+      <a href="#amt-per-campaign">Amount Spent per Campaign</a>
+      <a href="#reach-campaigns">Campaign Reach Comparison</a>
+      <a href="#cpc-by-country">CPC by Country</a>
+    </div>
+  </div>
+  <a href="#scatter-bubble-analysis">Scatter & Bubble Plot</a>
+  <a href="#heatmap-analysis">Heatmap Analysis</a>
+  <div class="nav-dropdown">
+  <a href="#pie-chart-analysis"  class="dropdown-toggle">Pie Chart Analysis</a>
+  <div class="dropdown-content">
+      <a href="#reach-b-a">Reach by Age Group</a>
+      <a href="#reach-by-geo">Reach by Geographic Group</a>
+      </div>
+  </div>
+<div class="nav-dropdown">
+  <a href="#stacked-bar-analysis" class="dropdown-toggle">Stacked Bar Chart</a>
+  <div class="dropdown-content">
+    <a href="#ctr-by-age-camp" title="CTR by Age Group within Campaigns">
+      CTR by Age Group within Campaigns</a>
+    <a href="#ctr-by-geo-and-camp-analysis" title="CTR by Geography & Campaign">
+      CTR by Geography &amp; Campaign
+    </a>
+    <a href="#uctr-by-campaign-analysis" title="uCTR (Unique Click-Through Rate) by Campaign">
+      uCTR (Unique Click-Through Rate) by Campaign
+    </a>
+  </div>
+</div>
+  <div class="nav-dropdown">
+  <a href="#analyzing-metric" class="dropdown-toggle">Campaign to Drop</a>
+  <div class="dropdown-content">
+    <a href="#analyzing-metric-2" title="Inefficiency">
+      Inefficiency
+    </a>
+    <a href="#campaign-drop" title="Further Investigation">
+      Further Investigation
+    </a>
+    <a href="#ctr-vs-reach" title="CTR vs Reach">
+      CTR vs Reach
+    </a>
+    <a href="#cpc-vs-ctr" title="CPC vs CTR">
+      CPC vs CTR
+    </a>
+  </div>
+  </div>
+  <a href="#conclusion">Conclusion</a>
+      </nav>
+
+    <main>
+      <div class="introduction-part">
+      <h2 id="introduction">Introduction</h2>
+      <p id="introduction-para">As part of our internship project with GlobalShala, I, <a href="https://www.linkedin.com/in/khabdulhadis/">Abdul Hadi</a>, served as a team-lead with two other team members: <a href="https://www.linkedin.com/in/derrick-nyarko-a01814104/">Derrick Nyarko</a> and <a href="https://www.linkedin.com/in/fahmida-salma-648282253/">Fahmida Salma</a>. We were tasked with analyzing the performance of 11 Facebook ad campaigns targeting two primary audiences: <b>“students”</b> and <b>“educators and principals.”</b>. In the first week of the project, we focused on identifying underperforming campaigns based on key performance indicators such as: Cost Per Click (CPC), Click-Through Rate (CTR), Unique Link Clicks (ULC), and Efficiency Score (ULC/Amount Spent).<br><br> Our objective was to recommend one campaign for removal to improve overall budget efficiency. Using R, we performed the necessary calculations and created visualizations such as bar charts, scatter plots, heatmaps, and pie charts, to support our insights. This phase laid the groundwork for optimizing marketing spend by reallocating budget toward higher-performing campaigns. <br><br> This was a four weeks internship program, with individual tasks divided into weeks. Here's a breakdown of how our tasks were divided. Clicking on the Week will lead you to the task of that week.</p>
+      </div>
+      <table border="1" cellpadding="8" cellspacing="0" style="margin: 16px 0;">
+  <thead>
+    <tr>
+      <th>Week</th>
+      <th>Task</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Week 1</td>
+      <td>Identify key metrics in the dataset and suggest a campaign for removal based on a set of criteria</td>
+    </tr>
+    <tr>
+      <td>Week 2</td>
+      <td>Justify your decision by further investigating your criteria</td>
+    </tr>
+    <tr>
+      <td><a href= "/assets/Data Visualization Week 3.pdf" target="_blank">Week 3</td>
+      <td>Make a presentation with all your visualizations and discoveries</td>
+    </tr>
+    <tr>
+      <td>Week 4</td>
+      <td>Present the presentation with your team to the stakeholders</td>
+    </tr>
+  </tbody>
+</table>
+      <div class="raw-marketing-dataset">
+      <h2>Raw Marketing Campaign Dataset</h2>
+      <iframe src="table.html" style="width:100%; min-height:400px; border:none; border-radius:12px; background:rgba(255,255,255,0.1);"></iframe>
+      </div>
+      <div style="height: 16px;"></div>
+      <p id="introduction-para">Before we can begin our analysis, we have to look at the dataset. This dataset is rendered here using <b>R Markdown</b>. Our dataset was in an xlsx Excel file, which you can download by clicking <a href="/assets/EXCELERATE_main.xlsx" target="_blank">here</a>. There were two empty columns: <b>@dropdown...17</b> and <b>@dropdown...18</b> We dropped these columns for ease in readability. Some column names were also renamed for the same purpose.<br> Following the initial cleaning, key performance metrics such as Cost Per Click (CPC), Click-Through Rate (CTR), and Unique Link Clicks (ULC) were calculated or validated to support further analysis. These metrics formed the foundation for subsequent visualizations and campaign evaluations.</p>
+      <div class="cleaned-marketing-dataset">
+      <h2>Cleaned Campaign Dataset</h2>
+      <iframe src="cleaned.html" style="width:100%; min-height:400px; border:none; border-radius:12px; background:rgba(255,255,255,0.1);"></iframe>
+      </div>
+      <div class="dataset-overview-part">
+      <h2 id="dataset-overview">Dataset Overview</h2>
+      <p id="dataset-overview-para">The dataset used in this project was exported from Facebook and contains detailed performance metrics for <b>11 ad campaigns</b>. Each row represents a unique campaign segment with several performance indicators that guided our analysis. Below is a description of the columns included in the dataset:</p>
+      </div>
+      <table border="1" cellpadding="8" cellspacing="0" style="margin: 16px 0;">
+        <thead>
+          <tr>
+            <th>Column</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Campaign Name</td>
+            <td>The name of the ad campaign.</td>
+          </tr>
+          <tr>
+            <td>Audience</td>
+            <td>The target audience of the ad (e.g., "students" or "educators and principals").</td>
+          </tr>
+          <tr>
+            <td>Age</td>
+            <td>The age group targeted by the ad campaign.</td>
+          </tr>
+          <tr>
+            <td>Reach</td>
+            <td>The number of unique users who saw the campaign at least once.</td>
+          </tr>
+          <tr>
+            <td>Impressions</td>
+            <td>The total number of times the campaign was displayed (including repeat views).</td>
+          </tr>
+          <tr>
+            <td>Clicks</td>
+            <td>The total number of clicks on the ad (may include multiple clicks from the same user).</td>
+          </tr>
+          <tr>
+            <td>Unique Clicks</td>
+            <td>The number of unique users who clicked on the ad.</td>
+          </tr>
+          <tr>
+            <td>Unique Link Clicks (ULC)</td>
+            <td>The number of distinct users who clicked on a link within the ad, providing a clearer indicator of genuine interest.</td>
+          </tr>
+          <tr>
+            <td>Click-Through Rate (CTR)</td>
+            <td>The percentage of impressions that resulted in clicks.</td>
+          </tr>
+          <tr>
+            <td>Unique Click-Through Rate (UCTR)</td>
+            <td>The percentage of unique users who saw the ad and clicked on the link (minimizes the bias from repeat clicks).</td>
+          </tr>
+          <tr>
+            <td>Frequency</td>
+            <td>The average number of times a user saw the ad.</td>
+          </tr>
+          <tr>
+            <td>Amount Spent</td>
+            <td>The total cost incurred for running the campaign.</td>
+          </tr>
+          <tr>
+            <td>Cost Per Click (CPC)</td>
+            <td>Indicates how much was spent for each click on the ad.</td>
+          </tr>
+          <tr>
+            <td>Cost Per Result (CPR)</td>
+            <td>Indicates the cost per meaningful interaction or conversion.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p id="dataset-overview-para-2">These columns were the foundation for our evaluation of campaign effectiveness. We used data extracted from these columns to identify weak performers and support data-driven marketing decisions.</p>
+      <div class="bar-chart-analysis-part">
+        <h2 id="bar-chart-analysis">Bar Chart Analysis: Insights from Audience and Campaign Metrics</h2>
+        <p id="bar-chart-analysis-para">Our dataset categorizes audience age into groups, with specific ad campaigns targeted towards each of these. This allows us to explore how different age brackets respond to campaigns, particularly by measuring <b>Click-Through Rate (CTR)</b>.</p>
+        <div class="bar-chart-1">
+          <h3 id="ctr-by-age">CTR by Age Group</h3>
+          <p id="ctr-by-age-para">Using Age Range on the X-axis and CTR on the Y-axis, we generated the following bar chart:</p>
+          <img src="/img/fig_1.png" alt="Bar Chart of CTR by Age Group" class ="bar-chart">
+        </div>
+        <p id="ctr-by-age-para">The chart shows that the 18–24 age group have the highest engagement. This is expected, as social media usage is highest among late teens and young adults. However, when we compare this with reach across age groups, the picture shifts.</p>
+        <div class="bar-chart-2">
+          <h3 id="age-grp-reach">Age Group vs. Reach</h3>
+          <img src="/img/fig_2.png" alt="Bar Chart of Age Group by Reach" class ="bar-chart">
+          <p id="age-grp-reach-para">Although the <b>25–34 age group</b> has significantly lower reach than 18–24, it shows <b>comparable CTR</b>, which indicates strong engagement from a smaller audience segment. To investigate more, we examined campaign-level performance.</p>
+        </div>
+        <div class="bar-chart-3">
+          <h3 id="amt-per-campaign">Amount Spent per Campaign</h3>
+          <img src="/img/fig_3.png" alt="Bar Chart of Amount Spent per Campaign" class="bar-chart">
+          <p id="amt-per-campaign-para">This bar chart shows that the <b>Educators and Principals</b> campaign incurred the highest cost, while the Ghana Students campaign was the most budget-friendly.</p>
+        </div>
+        <div class="bar-chart-4">
+          <h3 id="reach-campaigns">Campaign Reach Comparison</h3>
+          <img src="/img/fig_4.png" alt="Bar Chart of Campaign Reach" class="bar-chart">
+          <p id="reach-campaigns-para">Surprisingly, the Educators and Principals campaign ranks <b>fourth in reach</b>, despite being the most expensive. On the other hand, the <b>low-cost Ghana campaign</b> ranks <b>sixth in reach</b>, which makes it more cost-efficient in terms of visibility.</p>
+        </div>
+        <div class="bar-chart-5">
+          <h3 id="cpc-by-country">CPC by Country</h3>
+          <img src="/img/fig_5.png" alt="CPC by Country Bar Chart" class="bar-chart">
+          <p id="cpc-by-country-para">Countries like <b>Nigeria</b> and <b>India</b> show lower <b>Cost Per Click (CPC)</b>, yet India also has a high reach, making it both efficient and expansive. But reach alone isn’t the final metric of success.</p>
+        </div>
+        <div class="bar-chart-6">
+          <h3 id="uctr-by-country">uCTR by Country</h3>
+          <img src="/img/fig_6.png" alt="uCTR by Country Bar Chart" class="bar-chart">
+          <p id="uctr-by-country-para">Interestingly, <b>Nigeria</b>, despite a modest reach of 21,929, records the <b>highest Unique Click-Through Rate (uCTR) at 9.4%</b>. This suggests that Nigerian audiences were the most engaged, which offers a pretty valuable insight for future ad targeting and budget reallocation.</p>
+        </div>
+      </div>
+      <div class="scatter-bubble-analysis-part">
+        <h2 id="scatter-bubble-analysis">Scatter & Bubble Plot Analysis: Visibility vs. Engagement</h2>
+        <p id="scatter-bubble-analysis-para">To better understand the visibility and engagement levels of each campaign, we used a bubble plot with the following dimensions:</p>
+        <table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Element</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>X-axis</b></td>
+      <td>Reach: the number of unique users who saw the campaign.</td>
+    </tr>
+    <tr>
+      <td><b>Y-axis</b></td>
+      <td>Impressions: the total number of times the ad was shown.</td>
+    </tr>
+    <tr>
+      <td><b>Bubble Size</b></td>
+      <td>Unique Link Clicks (ULC): the number of individuals who clicked on the ad.</td>
+    </tr>
+    <tr>
+      <td><b>Color</b></td>
+      <td>Represents each campaign.</td>
+    </tr>
+  </tbody>
+</table>
+<div class="scatter-plot-1">
+  <img src="/img/fig_7.png" alt="Reach Vs Impression Plot" class="scatter-plot">
+</div>
+  <div class="scatter-plot-intp">
+    <h2 id="interpreting">Interpreting the Plot</h2>
+    <p id="interpreting-plt">Campaigns positioned in the top-right corner have both high reach and high impressions, which show strong visibility. Notably:</p>
+    <table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Campaign</th>
+      <th>Insights</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>SHU_3 (Students Apart from India and US)</b></td>
+      <td>High reach, high impressions, and large bubble size indicating strong visibility and high engagement. One of the highest in unique link clicks.</td>
+    </tr>
+    <tr>
+      <td><b>SHU_Students (Nepal)</b></td>
+      <td>Also shows high reach, impressions, and engagement through large bubble size.</td>
+    </tr>
+    <tr>
+      <td><b>Canada and USA Campaigns</b></td>
+      <td>Small bubbles indicate weak engagement despite modest reach.</td>
+    </tr>
+  </tbody>
+</table>
+    <h2 id="low-performing">Low-Performing Campaigns</h2>
+    <p id="interpreting-plt">Campaigns in the <b>bottom-left corner</b> are clear underperformers. These have low reach, low impressions, and small bubble sizes, which indicate minimal engagement. <br> Such campaings include <b>SHU_Students (UAE)</b>, <b>SHU_Students (USA)</b>, and SHU_Students (Canada). <br>The <b>UK campaign</b> is barely visible due to its <b>extremely low reach</b>, because it has a negligible impact.</p>
+  </div>
+      </div>
+      <div class="heatmap-analysis-part">
+        <h2 id="heatmap-analysis">Heatmap Analysis: Reach by Campaign and Age Group</h2>
+        <p id="heatmap-analysis-para">To understand how different age groups responded to each campaign, we created a heatmap showing <b>Reach</b> across campaigns and age ranges.</p>
+        <div class="heatmap-1">
+          <img src="/img/fig_8.png" alt="Heatmap of Reach by Campaign and Age Group" class="heatmap">
+          <div class="key-insights">
+          <h2>Key Insights</h2>
+          <ol id="interpreting-plt">
+            <li>The <b>18–24 age group</b> consistently shows the <b>strongest performance</b> across nearly all campaigns.</li>
+            <li>This trend is <b>most prominent</b> in the <b>SHU_Students (India)</b> campaign, which achieved a reach of <b>30,110</b> in this age group.</li>
+            <li>The <b>SHU_3 (Students Apart from India and US)</b> campaign follows closely as the <b>second-strongest performer.</b></li>
+            </ol>
+            </div>
+            <div class="underperformances">
+            <h3>Underperformance in Older Age Groups:</h3>
+            <ol id="interpreting-plt">
+              <li>Lighter shades across the <b>35–64 age range</b> mean <b>lower reach and engagement</b> among older demographics.</li>
+              <li>A notable exception is <b>SHU_6 (Educators and Principals)</b>, which reached <b>8,761 users aged 35–44</b>. This is because this campaign was targeted towards an older audience.</li>
+            </ol>
+            </div>
+            <div class="low-performers">
+              <h3>Low-Performing Campaigns:</h3>
+              <p id="interpreting-plt">Campaigns such as <b>SHU_Students (UK)</b>, <b>SHU_Students (Canada)</b>, and <b>SHU_Students (Australia)</b> show <b>consistently low reach</b> across <b>all age groups</b>, which show their consistent weak performance and limited audience impact.</p>
+            </div>
+        </div>
+      </div>
+      <div class="pie-chart-analysis-part">
+        <h2 id="pie-chart-analysis">Pie Chart Analysis: Audience Reach by Age and Geography</h2>
+        <p id="interpreting-plt">To get a clearer picture of how reach is distributed, we used pie charts to break down the data by <b>age group</b> and <b>geographic region</b>.</p>
+        <div class="reach-by-age-chart">
+          <h2 id="reach-b-a">Reach by Age Group</h2>
+          <img src="img/fig_9.png" alt="Reach by Age Group Pie Chart" class="pie-chart">
+          <p id="interpreting-plt">The chart clearly shows that the <b>18–24 age group</b> accounts for the <b>largest share of ad reach</b>, which confirms our earlier conclusion that younger audiences are more likely to view and engage with the campaigns.</p>
+        </div>
+        <div class="reach-by-geo-chart">
+          <h2 id="reach-by-geo">Reach by Geographic Group</h2>
+          <img src="img/fig_10.png" alt="Reach by Geographic Group Pie Chart" class="pie-chart">
+          <ol id="interpreting-plt">
+            <li><b>Group 1</b> <i>(Australia, Canada, United Kingdom, Ghana, Nigeria, Pakistan, United States)</i>  recorded the <b>highest reach</b>, contributing to <b>24.6%</b> of the total.</li>
+            <li><b>India</b> followed closely, accounting for <b>16.9%</b> of overall campaign reach.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="stacked-bar-chart-part">
+        <h2 id="stacked-bar-analysis">Stacked Bar Chart Analysis: CTR & uCTR by Campaign, Age, and Geography</h2>
+        <h3 id="ctr-by-age-camp">CTR by Age Group within Campaigns</h3>
+        <p id="interpreting-plt">To analyze how <b>Click-Through Rate (CTR)</b> is distributed across age groups within each campaign, we used a stacked bar chart.</p>
+        <img src="img/fig_11.png" alt="CTR by Age Group Within Campaigns Stacked Bar Chart" class="stacked-bar-chart">
+        <h2 id="key-insights">Key Observations:</h2>
+        <ol id="interpreting-plt">
+          <li><b>SHU_Students (Nigeria)</b> leads with the <b>highest CTR</b>, driven mainly by the <b>18–24</b> and <b>25–34</b> age groups.</li>
+          <li><b>SHU_Students (USA)</b> follows closely, also heavily skewed toward the younger demographic.</li>
+          <li><b>SHU_3 (Students Apart from India and US)</b> ranks third with a <b>17.8% CTR</b>, again dominated by younger age groups.</li>
+          <li><b>SHU_6 (Educators and Principals)</b> stands out as the only campaign with significant CTR contributions from <b>older age brackets (35–64)</b>, which aligns with its target audience.</li>
+        </ol>
+        <p id="interpreting-plt">Other campaigns like Ghana, UK, UAE, India, and Nepal show very low CTRs, which show that they are underperforming and need strategic adjustments.</p>
+        <h3>Audience Age Impact:</h3>
+        <p id="interpreting-plt">The <b>color distributions</b> in this chart clearly show that <b>younger age groups (13–34)</b> are the primary contributors to CTR across student-focused campaigns. But the <b>educator campaign</b> is better segmented, and has successfully reaching older age groups.<br>These trends help determine which segments to <b>expand or optimize</b> based on GlobalShala’s goals.</p>
+        <div class="ctr-by-geo-and-camp">
+          <h3 id="ctr-by-geo-and-camp-analysis">CTR by Geography & Campaign</h3>
+          <p id="interpreting-plt">We also compared <b>CTR across different countries and regions</b>, broken down by campaign.</p>
+          <img src="img/fig_12.png" alt="CTR by Geography and Campaign Bar Chart" class='stacked-bar-chart'>
+          <h2 id="key-insights">Findings:</h2>
+          <ol id="interpreting-plt">
+            <li><b>Nigeria</b> has the <b>highest CTR</b> among all geographies.</li>
+            <li><b>USA</b> and <b>Group 2</b> <i>(Australia, Canada, United Kingdom, Ghana, Niger, Nigeria, Nepal, Pakistan, Thailand, Taiwan)</i> follow with <b>CTR values of 6.1% and 5.6%</b> respectively.</li>
+            <li><b>Canada, India, Australia, Ghana, and the UK</b> maintain moderate CTRs between <b>3–4%</b>.</li>
+            <li><b>UAE, Group 1</b> <i>(Australia, Canada, United Kingdom, Ghana, Nigeria, Pakistan, United States)</i>, and <b>Nepal</b> show <b>lower CTRs</b>, ranging from <b>2.2–2.8%</b>.</li>
+          </ol>
+          <p id="interpreting-plt">This means that <b>Nigeria and USA are the most efficient regions</b> in terms of engagement, and <b>UAE and Nepal may need campaign redesigns or strategy shifts</b>.</p>
+        </div>
+        <div class="uctr-by-campaign">
+          <h3 id="uctr-by-campaign-analysis">uCTR (Unique Click-Through Rate) by Campaign</h3>
+          <p id="interpreting-plt">Finally, we evaluated campaign performance using <b>uCTR</b>, calculated as: <br> <code>uCTR = (Unique Clicks / Reach) × 100</code> <br> This gives us a more accurate picture of how much of the targeted audience actually engaged with the campaign.</p>
+          <img src="img/fig_13.png" alt="uCTR by Campaign Bar Chart" class="stacked-bar-chart">
+          <h2 id="key-insights">Insights:</h2>
+          <ol id="interpreting-plt">
+            <li><b>SHU_Students (UAE)</b> has the <b>lowest uCTR</b>, which shows <b>poor audience engagement</b> despite whatever reach it might have achieved.</li>
+            <li>Campaigns with <b>high uCTR</b> are more effective, as they generate interest from a larger proportion of their audience.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="drop-campaign">
+        <div class="analyzing-metrics">
+        <h2 id="analyzing-metric">Analyzing Metrics to Suggest Dropping a Campaign</h2>
+        <p id="interpreting-plt">To make a data-driven recommendation for which campaign to drop, we focused on key performance metrics: <b>Cost Per Click (CPC)</b> and <b>the relationship between Amount Spent and Unique Link Clicks (ULC)</b>. These together highlight cost-efficiency and engagement effectiveness.</p>
+        <div class="cpc-bar-chart">
+          <img src="img/fig_14.png" alt="CPC by Campaign Bar Chart" class="bar-chart">
+          <p id="interpreting-plt"><b>CPC (Cost Per Click)</b> measures how much each click on an ad costs, calculated by dividing the total spend by the number of clicks received: <br><br><b>CPC = Amount Spent / Total Clicks</b><br> <b>Lower CPC</b> indicates more cost-effective campaigns. Simply put: more clicks for less money. <br> <b>Higher CPC</b> suggests inefficient spending and possible underperformance. <br><br> By evaluating CPC across campaigns, we can quickly spot which ones are <b>consuming budget without delivering proportional engagement</b>.</p>
+        </div>
+        <h2 id="analyzing-metric-2">High Spend, Low Engagement = Inefficiency</h2>
+        <div class="ulc-total-spent-plot">
+          <img src="img/fig_15.png" alt="ULC vs Total Amount Spent Scatter Plot" class="scatter-plot">
+          <p id="interpreting-plt">Another metric we analyzed was the ratio of <b>Amount Spent vs. Unique Link Clicks (ULC)</b>, which reflects the <b>true cost-efficiency</b> of each campaign. <br><br><b>SHU_6 (Educators and Principals)</b> stands out as a <b>high-budget campaign with comparatively low ULC</b>, which means <b>poor ROI</b> and inefficient audience engagement. <br><br>On the other hand, campaigns that maintain <b>moderate spending and higher ULC</b>, like SHU_3 (Students outside India & US), show <b>better performance and greater cost-effectiveness.</b></p>
+        </div>
+        </div>
+        <div class="campaign-drop">
+          <h2 id="campaign-drop">Campaign to Drop</h2>
+          <p id="interpreting-plt">Based on the key performance metrics we’ve analyzed—including <b>Click-Through Rate (CTR)</b>, <b>Cost Per Click (CPC)</b>, and <b>Unique Link Clicks (ULC)</b>, we can now make a data-backed recommendation for the <b>campaign that should be dropped</b>.</p>
+          <div class="ctr-vs-reach-plot">
+            <h3 id="ctr-vs-reach">CTR vs Reach</h3>
+            <img src="img/fig_16.png" alt="CTR vs Reach Scatter Plot" class="scatter-plot">
+            <p id="interpreting-plt">From this chart, we can see that <b>SHU_Students (Nepal)</b> has one of the <b>lowest CTRs</b> among all campaigns, <b>despite having a comparatively high reach</b>. This means poor engagement: many people saw the ad, but very few interacted with it.</p>
+          </div>
+          <div class="cpc-vs-ctr-plot">
+            <h3 id="cpc-vs-ctr">CPC vs CTR</h3>
+            <img src="img/fig_17.png" alt="CPC vs CTR Scatter Plot" class="scatter-plot">
+            <p id="interpreting-plt">This chart offers a clearer view of <b>efficiency</b>:</p>
+            <h4>Top Performers:</h4>
+            <div style="height: 16px;"></div>
+            <p id="interpreting-plt"><b>SHU_Students (Nigeria)</b> and <b>SHU3_ (Students Apart from India and US)</b> have high CTR and low CPC (~$1). <br><br> These are both <b>cost-effective and highly engaging campaigns</b>, which makes them ideal for continued investment.</p>
+            <h4>Poor Performers:</h4>
+            <div style="height: 16px;"></div>
+            <p id="interpreting-plt"><b>SHU_Students (Australia)</b> and <b>SHU_Students (UK)</b> show low-to-moderate CTR paired with very high CPC, which means that these campaigns are expensive with weak returns. <br><br> <b>SHU_Students (Nepal)</b> also falls into this underperforming group, as it combines low CTR with a moderate to high spend.</p>
+          </div>
+        </div>
+      </div>
+      <div class="conclusion">
+        <h2 id="conclusion">Conclusion</h2>
+        <p id="interpreting-plt">After a detailed performance evaluation of all 11 Facebook ad campaigns, we recommend <b>discontinuing the SHU_Students (Australia) campaign</b> because of its <b>inefficiency and high cost</b>. <br><br> Additionally, we recommend optimizing the <b>United Kingdom campaign</b> because we see that there's potential for growth in that campaign.</p>
+        <h3 id="reason-to-drop">Why Drop Australia?</h3>
+        <div style="height: 16px;"></div>
+        <h4 id="supporting-evidence">Supporting Evidence:</h4>
+        <div style="height: 16px;"></div>
+  <p id="interpreting-plt">The SHU_Students (Australia) campaign has the <b>highest Cost Per Click (CPC)</b> at <b>$7.15</b>, which is <b>213% higher</b> than the average CPC of <b>$2.28</b> and over <b>21 times more</b> than the CPC for the best-performing Nigeria campaign (<b>$0.34</b>). <br><br> Engagement is also low, with a <b>CTR of just 3.3%</b>, well below the <b>4.2% campaign average</b>. <br><br> Despite reaching <b>14,492</b> people, the conversion metrics remain unimpressive. The campaign is a budget drain, with a total spend of <b>$850</b>, accounting for <b>7% of the total marketing budget</b>. Removing this campaign would save <b>$850</b> immediately, <b>boost overall efficiency by approximately 18%</b>, and allow reallocation of resources to <b>high-performing campaigns</b> with better ROI.
+</p>
+    <h3 id="campaign-for-opt">Campaign We Suggest For Optimization</h3>
+    <div style="height: 16px;"></div>
+    <h4>SHU_Students (UK):</h4>
+    <div style="height: 16px;"></div>
+<p id="interpreting-plt">
+  The campaign has a <b>CPC of $7.08</b> and a <b>CTR of 3.0%</b>. While this performance is slightly better than the Australia campaign, it is still not <b>cost-effective</b>. We recommend that this campaign undergo optimization and/or A/B testing before any further investment is made. But there is some potential for improvement.
+</p>
+    <h3 id="retain-and-expand">Top-Performing Campaigns (To Retain and Expand)</h3>
+  <div style="height: 16px;"></div>
+  <h4>SHU_Students (Nigeria):</h4>
+  <div style="height: 16px;"></div>
+  <p id="interpreting-plt">This campaign achieved a <b>CTR of 9.5%</b> and a <b>CPC of $0.34</b>, which makes it the most efficient and engaging campaign overall.</p>
+  <div style="height: 16px;"></div>
+  <h4>SHU3_ (Students Apart from India and US):</h4>
+  <div style="height: 16px;"></div>
+  <p id="interpreting-plt">With a <b>CTR of 5.6%</b> and a <b>CPC of $0.42</b>, this campaign has a strong balance of high engagement and low cost.</p>
+  <div style="height: 16px;"></div>
+  <h4>SHU_Students (USA):</h4>
+  <div style="height: 16px;"></div>
+  <p id="interpreting-plt">Although the <b>CPC is higher at $5.04</b>, the campaign maintains a solid <b>CTR of 6.1%</b> and delivers good engagement levels.
+</p>
+<h3 id="final-note">Final Note</h3>
+<p id="interpreting-plt">By dropping underperforming campaigns like <b>Australia</b>, and focusing resources on high-impact campaigns and regions such as <b>Nigeria</b> and <b>SHU_3</b>, the marketing team can achieve better results with lower cost, enhancing both reach and ROI. In the second week, we will justify this decision by further investigation.</p>
+</div>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
