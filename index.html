@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Data Visualization Project</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="mobile.css" media="only screen and (max-width: 768px)">
 </head>
 <body>
   <section class="background-wave">
@@ -21,6 +22,9 @@
       <p class="sub-title">Data-Driven Insights into Ad Campaign Performance: A Collaborative Internship Project Analzying Engagement, Reach, and Cost-Efficiency to Optimize GlobalShala's Marketing Strategy.<br>Arranged by <a href="https://www.linkedin.com/in/khabdulhadis/">Abdul Hadi</a></p>
     </div>
 
+<button class="hamburger" aria-label="Open navigation" onclick="toggleNav()">
+  <span></span>
+</button>
     <nav class="side-nav hidden">
   <a href="#introduction">Introduction</a>
   <a href="#dataset-overview">Dataset Overview</a>
@@ -436,6 +440,13 @@
 </div>
     </main>
   </div>
+  <script>
+function toggleNav() {
+  const nav = document.querySelector('.side-nav');
+  nav.classList.toggle('active');
+  document.querySelector('.page-content').classList.toggle('menu-open');
+}
+</script>
   <script src="script.js"></script>
 </body>
 </html>
